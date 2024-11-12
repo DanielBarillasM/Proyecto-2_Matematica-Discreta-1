@@ -125,7 +125,7 @@ def generar_primo(rango_inferior, rango_superior, seed=1):
         return None
 
     # Selección de un primo usando el generador de números pseudoaleatorios
-    index =( generador_pseudoaleatorio(seed, len(primos) * 50) + generador_pseudoaleatorio(seed, 14) ) % len(primos)
+    index =( generador_pseudoaleatorio(seed, len(primos) * 50) + generador_pseudoaleatorio(seed, 10000) ) % len(primos)
     return primos[index]
 
 # Función para generar las llaves pública y privada de RSA
