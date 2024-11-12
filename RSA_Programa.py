@@ -170,8 +170,11 @@ def generar_llaves(rango_inferior: int, rango_superior: int, seed: int=1):
         # Generación de primos p y q
         p = generar_primo(rango_inferior, rango_superior, seed)
         q = generar_primo(rango_inferior, rango_superior, seed + 1)
+
+        k = 2
         while p == q:
-            q = generar_primo(rango_inferior, rango_superior, seed + 2)
+            q = generar_primo(rango_inferior + k, rango_superior, seed + k)
+            k = k + 1
         
         # Cálculo de n y phi
         n = p * q
