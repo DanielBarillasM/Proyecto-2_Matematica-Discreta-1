@@ -1,3 +1,19 @@
+# -------------------------------------------------------------------------------------------------
+# Nombre del integrante del grupo 5: PABLO DANIEL BARILLAS MORENO - Carné No. 22193
+# Nombre del integrante del grupo 5: DIEGO JAVIER LOPEZ REINOSO - Carné No. 23747
+# Nombre del integrante del grupo 5: HUGO DANIEL BARILLAS AJIN - Carné No. 23556
+# Número del grupo: 5
+# Universidad: Universidad del Valle de Guatemala
+# Curso: Matemática Discreta
+# Programa del proyecto 2: Sistema de Encriptación RSA
+# Versión: 4.0
+# Fecha de entrega del proyecto 2: 20/11/2024
+# Descripción: Este programa permite al usuario generar llaves RSA, encriptar y desencriptar mensajes.
+#              Implementa el cifrado RSA desde cero y utiliza programación defensiva para manejar 
+#              entradas incorrectas de manera robusta. Incluye una interfaz interactiva y mensajes de 
+#              animación en consola para mejorar la experiencia del usuario.
+# -------------------------------------------------------------------------------------------------
+
 from colorama import Fore, Style, init
 import time
 
@@ -126,7 +142,7 @@ def generar_primo(rango_inferior, rango_superior, seed=1):
         return None
 
     # Selección de un primo usando el generador de números pseudoaleatorios
-    index =( generador_pseudoaleatorio(seed, len(primos) * 50) + generador_pseudoaleatorio(seed, 10000)) % len(primos)
+    index =( generador_pseudoaleatorio(seed, len(primos) * 50) + generador_pseudoaleatorio(seed, 14) ) % len(primos)
     return primos[index]
 
 # Función para generar las llaves pública y privada de RSA
@@ -154,10 +170,8 @@ def generar_llaves(rango_inferior: int, rango_superior: int, seed: int=1):
         # Generación de primos p y q
         p = generar_primo(rango_inferior, rango_superior, seed)
         q = generar_primo(rango_inferior, rango_superior, seed + 1)
-        k = 2
         while p == q:
-            q = generar_primo(rango_inferior + k, rango_superior, seed * k)
-            k = k + 1
+            q = generar_primo(rango_inferior, rango_superior, seed + 2)
         
         # Cálculo de n y phi
         n = p * q
