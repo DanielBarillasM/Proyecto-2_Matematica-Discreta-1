@@ -6,6 +6,7 @@ init(autoreset=True)
 
 # Variable global para almacenar el mensaje encriptado
 mensaje_encriptado_global = []
+mensaje_original = ""  # Variable para almacenar el mensaje original
 
 # Función para mostrar texto animado
 def animacion_texto(texto, delay=0.05, color=Fore.WHITE):
@@ -247,15 +248,19 @@ def main():
                 animacion_texto("Primero debes generar las llaves.", color=Fore.RED)
             else:
                 mensaje = input(Fore.CYAN + "Ingresa el mensaje a encriptar: ")
+                global mensaje_original
+                mensaje_original = mensaje  # Almacena el mensaje original
                 encriptar(mensaje, llave_publica)
 
         elif opcion == "3":
             if not llave_privada:
                 animacion_texto("Primero debes generar las llaves.", color=Fore.RED)
-            elif not mensaje_encriptado_global:
-                animacion_texto("Primero debes encriptar un mensaje.", color=Fore.RED)
             else:
-                desencriptar(mensaje_encriptado_global, llave_privada)
+                # Solicita ingresar el mensaje encriptado manualmente
+                mensaje_encriptado_input = input(Fore.CYAN + "Ingresa el mensaje encriptado (separado por comas): ")
+                # Convierte la entrada en una lista de enteros
+                mensaje_encriptado = [int(x) for x in mensaje_encriptado_input.split(",")]
+                desencriptar(mensaje_encriptado, llave_privada)
 
         elif opcion == "4":
             animacion_texto("Gracias por utilizar el sistema RSA. Hasta pronto.", color=Fore.CYAN)
