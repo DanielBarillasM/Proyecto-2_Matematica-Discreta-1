@@ -10,9 +10,9 @@ Para reforzar los objetivos educativos, se han implementado manualmente los algo
 Este proyecto busca ser una herramienta útil tanto en entornos educativos formales como en situaciones de autoaprendizaje, permitiendo a los usuarios experimentar y obtener resultados inmediatos que refuercen su comprensión teórica. Su diseño y desarrollo están orientados no solo a mostrar el poder de la criptografía RSA, sino también a ofrecer un recurso práctico y accesible para aprender los conceptos matemáticos y computacionales que la sustentan.
 
 ## Autores
-Nombre del integrante del grupo 5: PABLO DANIEL BARILLAS MORENO - Carné No. 22193
-Nombre del integrante del grupo 5: DIEGO JAVIER LOPEZ REINOSO - Carné No. 23747
-Nombre del integrante del grupo 5: HUGO DANIEL BARILLAS AJIN - Carné No. 23556
+- Nombre del integrante del grupo 5: PABLO DANIEL BARILLAS MORENO - Carné No. 22193
+- Nombre del integrante del grupo 5: DIEGO JAVIER LOPEZ REINOSO - Carné No. 23747
+- Nombre del integrante del grupo 5: HUGO DANIEL BARILLAS AJIN - Carné No. 23556
 
 ## Instalación de Librerias Adicionales
 
