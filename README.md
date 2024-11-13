@@ -1,4 +1,4 @@
-# Curso: Matemática Discreta 1 - MM2015 - Proyecto 2
+# Curso: Matemática Discreta 1 - MM2015 - Proyecto 2 (Encriptación RSA)
 
 ## Descripción
 Este proyecto tiene como objetivo desarrollar un programa interactivo en Python que implemente el sistema de encriptación RSA desde cero. El programa permite a los usuarios generar llaves RSA (clave pública y privada), encriptar mensajes utilizando la clave pública y desencriptar mensajes mediante la clave privada. Este enfoque ofrece una experiencia educativa práctica, en la que los usuarios pueden explorar y entender los principios fundamentales de la criptografía asimétrica, como el uso de números primos, la exponenciación modular y el cálculo del inverso modular.
