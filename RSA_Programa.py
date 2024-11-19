@@ -259,7 +259,7 @@ def main():
                 rango_superior = int(input(Fore.CYAN + "Ingresa el rango superior para generar números primos: "))
                 llave_publica, llave_privada = generar_llaves(rango_inferior, rango_superior)
             except ValueError:
-                animacion_texto("Entrada no válida. Por favor, ingresa números enteros.", color=Fore.RED)
+                animacion_texto("Entrada no válida. Por favor, ingresa números enteros positivos.", color=Fore.RED)
 
         elif opcion == "2":
             if not llave_publica:
@@ -274,11 +274,14 @@ def main():
             if not llave_privada:
                 animacion_texto("Primero debes generar las llaves.", color=Fore.RED)
             else:
-                # Solicita ingresar el mensaje encriptado manualmente
-                mensaje_encriptado_input = input(Fore.CYAN + "Ingresa el mensaje encriptado (separado por comas): ")
-                # Convierte la entrada en una lista de enteros
-                mensaje_encriptado = [int(x) for x in mensaje_encriptado_input.split(",")]
-                desencriptar(mensaje_encriptado, llave_privada)
+                try:
+                    # Solicita ingresar el mensaje encriptado manualmente
+                    mensaje_encriptado_input = input(Fore.CYAN + "Ingresa el mensaje encriptado (separado por comas): ")
+                    # Convierte la entrada en una lista de enteros
+                    mensaje_encriptado = [int(x) for x in mensaje_encriptado_input.split(",")]
+                    desencriptar(mensaje_encriptado, llave_privada)
+                except ValueError:
+                    animacion_texto("Entrada no válida. Ingresar enteros positivos válidos separados por comas.", color=Fore.RED)
 
         elif opcion == "4":
             animacion_texto("Gracias por utilizar el sistema RSA. Hasta pronto.", color=Fore.CYAN)
