@@ -1,3 +1,19 @@
+# -------------------------------------------------------------------------------------------------
+# Nombre del integrante del grupo 5: PABLO DANIEL BARILLAS MORENO - Carné No. 22193
+# Nombre del integrante del grupo 5: DIEGO JAVIER LOPEZ REINOSO - Carné No. 23747
+# Nombre del integrante del grupo 5: HUGO DANIEL BARILLAS AJIN - Carné No. 23556
+# Número del grupo: 5
+# Universidad: Universidad del Valle de Guatemala
+# Curso: Matemática Discreta
+# Programa del proyecto 2: Sistema de Encriptación RSA
+# Versión: 4.0
+# Fecha de entrega del proyecto 2: 20/11/2024
+# Descripción: Este programa permite al usuario generar llaves RSA, encriptar y desencriptar mensajes.
+#              Implementa el cifrado RSA desde cero y utiliza programación defensiva para manejar 
+#              entradas incorrectas de manera robusta. Incluye una interfaz interactiva y mensajes de 
+#              animación en consola para mejorar la experiencia del usuario.
+# -------------------------------------------------------------------------------------------------
+
 from colorama import Fore, Style, init
 import time
 
@@ -6,6 +22,7 @@ init(autoreset=True)
 
 # Variable global para almacenar el mensaje encriptado
 mensaje_encriptado_global = []
+mensaje_original = ""  # Variable para almacenar el mensaje original
 
 # Función para mostrar texto animado
 def animacion_texto(texto, delay=0.01, color=Fore.WHITE):
@@ -125,7 +142,7 @@ def generar_primo(rango_inferior, rango_superior, seed=1):
         return None
 
     # Selección de un primo usando el generador de números pseudoaleatorios
-    index = generador_pseudoaleatorio(seed, len(primos)) % len(primos)
+    index =( generador_pseudoaleatorio(seed, len(primos) * 50) + generador_pseudoaleatorio(seed, 14) ) % len(primos)
     return primos[index]
 
 # Función para generar las llaves pública y privada de RSA
@@ -156,8 +173,10 @@ def generar_llaves(rango_inferior: int, rango_superior: int, seed: int=1):
         # Generación de primos p y q
         p = generar_primo(rango_inferior, rango_superior, seed)
         q = generar_primo(rango_inferior, rango_superior, seed + 1)
+        i = 2
         while p == q:
-            q = generar_primo(rango_inferior, rango_superior, seed + 2)
+            q = generar_primo(rango_inferior, rango_superior, seed + i)
+            i+=1
         
         # Cálculo de n y phi
         n = p * q
@@ -243,22 +262,29 @@ def main():
                 rango_superior = int(input(Fore.CYAN + "Ingresa el rango superior para generar números primos: "))
                 llave_publica, llave_privada = generar_llaves(rango_inferior, rango_superior)
             except ValueError:
-                print(Fore.RED + "Error: Valor no válido. Por favor, ingresa un número entero.")
+                animacion_texto("Entrada no válida. Por favor, ingresa números enteros.", color=Fore.RED)
 
         elif opcion == "2":
             if not llave_publica:
                 animacion_texto("Primero debes generar las llaves.", color=Fore.RED)
             else:
                 mensaje = input(Fore.CYAN + "Ingresa el mensaje a encriptar: ")
+                global mensaje_original
+                mensaje_original = mensaje  # Almacena el mensaje original
                 encriptar(mensaje, llave_publica)
 
         elif opcion == "3":
             if not llave_privada:
                 animacion_texto("Primero debes generar las llaves.", color=Fore.RED)
-            elif not mensaje_encriptado_global:
-                animacion_texto("Primero debes encriptar un mensaje.", color=Fore.RED)
             else:
-                desencriptar(mensaje_encriptado_global, llave_privada)
+                try:
+                    # Solicita ingresar el mensaje encriptado manualmente
+                    mensaje_encriptado_input = input(Fore.CYAN + "Ingresa el mensaje encriptado (separado por comas): ")
+                    # Convierte la entrada en una lista de enteros
+                    mensaje_encriptado = [int(x) for x in mensaje_encriptado_input.split(",")]
+                    desencriptar(mensaje_encriptado, llave_privada)
+                except ValueError:
+                    animacion_texto("Entrada no válida. Ingresar enteros positivos válidos separados por comas.", color=Fore.RED)
 
         elif opcion == "4":
             animacion_texto("Gracias por utilizar el sistema RSA. Hasta pronto.", color=Fore.CYAN)
