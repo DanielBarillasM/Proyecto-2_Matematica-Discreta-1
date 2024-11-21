@@ -8,7 +8,7 @@ init(autoreset=True)
 mensaje_encriptado_global = []
 
 # Función para mostrar texto animado
-def animacion_texto(texto, delay=0.05, color=Fore.WHITE):
+def animacion_texto(texto, delay=0.01, color=Fore.WHITE):
     """
     Muestra texto con un efecto de animación en la consola.
     
@@ -22,7 +22,7 @@ def animacion_texto(texto, delay=0.05, color=Fore.WHITE):
     print(Style.RESET_ALL)
 
 # Función para mostrar barra de progreso en consola
-def barra_progreso(cantidad=5, delay=0.2, color=Fore.YELLOW):
+def barra_progreso(cantidad=5, delay=0.01, color=Fore.YELLOW):
     """
     Muestra una barra de progreso en la consola.
     
@@ -139,13 +139,16 @@ def generar_llaves(rango_inferior: int, rango_superior: int, seed: int=1):
     :return: Una tupla con la llave pública y la llave privada.
     """
     # Validar input
+    if (rango_superior - rango_inferior) < 5:
+        print(Fore.RED + "El límite inferior y superior tienen que tener una diferencia mínimo de 5, para mayor seguridad. ")
+        raise ValueError("El límite inferior y superior tienen que tener una diferencia mínimo de 5, para mayor seguridad. ")
     if not isinstance(rango_inferior, int) or not isinstance(rango_superior, int):
         raise ValueError("Los límites del rango deben ser números enteros.")
     if rango_inferior <= 0 or rango_superior <= 0:
         raise ValueError("Los límites del rango deben ser positivos.")
     if rango_inferior >= rango_superior:
         raise ValueError("El rango inferior debe ser menor que el rango superior.")
-        
+    
     animacion_texto("Generando llaves RSA...", color=Fore.CYAN)
     barra_progreso()
     
@@ -240,7 +243,7 @@ def main():
                 rango_superior = int(input(Fore.CYAN + "Ingresa el rango superior para generar números primos: "))
                 llave_publica, llave_privada = generar_llaves(rango_inferior, rango_superior)
             except ValueError:
-                animacion_texto("Entrada no válida. Por favor, ingresa números enteros.", color=Fore.RED)
+                print(Fore.RED + "Error: Valor no válido. Por favor, ingresa un número entero.")
 
         elif opcion == "2":
             if not llave_publica:
