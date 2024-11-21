@@ -156,9 +156,9 @@ def generar_llaves(rango_inferior: int, rango_superior: int, seed: int=1):
     :return: Una tupla con la llave pública y la llave privada.
     """
     # Validar input
-    if (rango_superior - rango_inferior) < 5:
-        print(Fore.RED + "El límite inferior y superior tienen que tener una diferencia mínimo de 5, para mayor seguridad. ")
-        raise ValueError("El límite inferior y superior tienen que tener una diferencia mínimo de 5, para mayor seguridad. ")
+    if (rango_superior - rango_inferior) < 10:
+        print(Fore.RED + "El límite inferior y superior tienen que tener una diferencia mínimo de 10, para mayor seguridad. ")
+        raise ValueError("El límite inferior y superior tienen que tener una diferencia mínimo de 10, para mayor seguridad. ")
     if not isinstance(rango_inferior, int) or not isinstance(rango_superior, int):
         raise ValueError("Los límites del rango deben ser números enteros.")
     if rango_inferior <= 0 or rango_superior <= 0:
